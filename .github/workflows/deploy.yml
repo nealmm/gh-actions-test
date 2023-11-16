@@ -24,13 +24,13 @@ jobs:
 
     - name: Checkout the Repository
       uses: actions/checkout@v3
+      with:
+        clean: false
 
     - name: Configure CMake and Build
       # Source environment variables from 'emsdk_env.sh' to use 'emcmake' and 'emmake'.
       # Using 'emcmake', configure CMake in a 'build' subdirectory and then run 'emmake'.
       run: |
-        pwd
-        ls ..
         source ../emsdk/emsdk_env.sh
         emcmake cmake -B build
         emmake make -C build
