@@ -18,20 +18,18 @@ jobs:
       # Clone the Emscripten SDK repository, install tools and activate.
       # See: https://emscripten.org/docs/getting_started/downloads.html
       run: |
-        ls
         git clone https://github.com/emscripten-core/emsdk.git
-        cd emsdk
-        ./emsdk install latest
-        ./emsdk activate latest
+        emsdk/emsdk install latest
+        emsdk/emsdk activate latest
 
     - name: Checkout the Repository
       uses: actions/checkout@v3
 
     - name: Configure CMake and Build
       # Source environment variables from 'emsdk_env.sh' to use 'emcmake' and 'emmake'.
-      # Using 'emcmake', configure CMake in a 'build' subdirectory; then, 'cd' into this subdirectory and run 'emmake'.
+      # Using 'emcmake', configure CMake in a 'build' subdirectory and then run 'emmake'.
       run: |
-        source emsdk/emsdk_env.sh
+        source ../emsdk/emsdk_env.sh
         emcmake cmake -B build
         emmake make -C build
 
