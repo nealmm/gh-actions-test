@@ -39,7 +39,8 @@ jobs:
     - name: Upload GitHub Pages Artifact
       uses: actions/upload-pages-artifact@v2
       with:
-        path: ${{github.workspace}}/build/dist
+        path: build/dist
+        # path: ${{github.workspace}}/build/dist
 
   deploy:
     needs: build
