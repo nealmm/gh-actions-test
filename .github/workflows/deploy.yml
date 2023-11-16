@@ -39,5 +39,6 @@ jobs:
     - name: Build
       # Build your program with the given configuration
       run: |
+        source ${{github.workspace}}/emsdk/emsdk_env.sh
         cd ${{github.workspace}}/build
         emmake make
