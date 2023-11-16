@@ -44,6 +44,14 @@ jobs:
       url: ${{steps.deployment.outputs.page_url}}
     runs-on: ubuntu-latest
     steps:
+      - name: Create GitHub Pages Artifact
+        run: |
+          mkdir _site
+          cp ${{github.workspace}}/build/index.* _site
+
+      - name: Upload GitHub Pages Artifact
+        uses: actions/upload-pages-artifact@v2
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
