@@ -6,10 +6,6 @@ on:
   push:
     branches: [ "main" ]
 
-env:
-  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
-  BUILD_TYPE: Release
-
 jobs:
   build:
     # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
@@ -22,23 +18,18 @@ jobs:
 
     - name: Install Emscripten
       # Clone the Emscripten SDK repository, install tools and activate.
-      # See https://emscripten.org/docs/getting_started/downloads.html
+      # See: https://emscripten.org/docs/getting_started/downloads.html
       run: |
         git clone https://github.com/emscripten-core/emsdk.git
         cd emsdk
         ./emsdk install latest
         ./emsdk activate latest
 
-    - name: Configure CMake
-      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
-      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
+    - name: Configure CMake and Build
+      # Source environment variables from 'emsdk_env.sh' to use 'emcmake' and 'emmake'.
+      # Using 'emcmake', configure CMake in a 'build' subdirectory; then, 'cd' into this subdirectory and run 'emmake'.
       run: |
         source ${{github.workspace}}/emsdk/emsdk_env.sh
-        emcmake cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
-
-    - name: Build
-      # Build your program with the given configuration
-      run: |
-        source ${{github.workspace}}/emsdk/emsdk_env.sh
+        emcmake cmake -B ${{github.workspace}}/build
         cd ${{github.workspace}}/build
         emmake make
