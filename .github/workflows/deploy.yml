@@ -20,7 +20,7 @@ jobs:
       # Clone the Emscripten SDK repository, install tools and activate.
       # See: https://emscripten.org/docs/getting_started/downloads.html
       run: |
-        ls
+        cd .. && ls
         git clone https://github.com/emscripten-core/emsdk.git
         cd emsdk
         ./emsdk install latest
