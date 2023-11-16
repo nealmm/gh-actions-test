@@ -8,5 +8,5 @@ set_target_properties(Main
     PROPERTIES
     OUTPUT_NAME "index"
     SUFFIX ".html"
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/out"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/dist"
 )

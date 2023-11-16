@@ -4,7 +4,7 @@ name: CMake on a single platform
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
@@ -29,9 +29,8 @@ jobs:
       # Source environment variables from 'emsdk_env.sh' to use 'emcmake' and 'emmake'.
       # Using 'emcmake', configure CMake in a 'build' subdirectory; then, 'cd' into this subdirectory and run 'emmake'.
       run: |
-        source ${{github.workspace}}/emsdk/emsdk_env.sh
-        emcmake cmake -B ${{github.workspace}}/build
-        emmake make -C ${{github.workspace}}/build
+        ${{github.workspace}}/emsdk/upstream/emscripten/emcmake cmake -B ${{github.workspace}}/build
+        ${{github.workspace}}/emsdk/upstream/emscripten/emmake make -C ${{github.workspace}}/build
 
     # - name: Create GitHub Pages Artifact
     #   run: |
@@ -41,7 +40,7 @@ jobs:
     - name: Upload GitHub Pages Artifact
       uses: actions/upload-pages-artifact@v2
       with:
-        path: ${{github.workspace}}/build/out
+        path: ${{github.workspace}}/build/dist
 
   deploy:
     needs: build

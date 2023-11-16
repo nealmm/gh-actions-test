@@ -1,5 +1,6 @@
 #include <SDL.h>
 #include <emscripten/html5.h>
+#include <iostream>
 
 int width, height;
 SDL_Window *window;
@@ -26,6 +27,8 @@ void frame() {
 }
 
 int main() {
+    // std::cout << "Hello, world!" << std::endl;
+
     emscripten_get_canvas_element_size("canvas", &width, &height);
 
     SDL_Init(SDL_INIT_VIDEO);
