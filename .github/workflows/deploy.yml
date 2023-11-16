@@ -31,16 +31,17 @@ jobs:
       run: |
         source ${{github.workspace}}/emsdk/emsdk_env.sh
         emcmake cmake -B ${{github.workspace}}/build
-        cd ${{github.workspace}}/build
-        emmake make
+        emmake make -C ${{github.workspace}}/build
 
-    - name: Create GitHub Pages Artifact
-      run: |
-        mkdir _site
-        cp ${{github.workspace}}/build/index.* _site
+    # - name: Create GitHub Pages Artifact
+    #   run: |
+    #     mkdir _site
+    #     cp ${{github.workspace}}/build/index.* _site
 
     - name: Upload GitHub Pages Artifact
       uses: actions/upload-pages-artifact@v2
+      with:
+        path: ${{github.workspace}}/build/out
 
   deploy:
     needs: build
