@@ -14,12 +14,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: First Step
+      run: pwd
+
     - uses: actions/checkout@v3
 
     - name: Install Emscripten
       # Clone the Emscripten SDK repository, install tools and activate.
       # See: https://emscripten.org/docs/getting_started/downloads.html
       run: |
+        pwd
         git clone https://github.com/emscripten-core/emsdk.git
         cd emsdk
         ./emsdk install latest
